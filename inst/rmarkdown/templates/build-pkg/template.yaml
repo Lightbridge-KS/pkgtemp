@@ -1,0 +1,4 @@
+name: Build Package
+description: >
+   R Markdown Template for Building Package
+create_dir: FALSE
