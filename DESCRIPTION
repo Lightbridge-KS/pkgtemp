@@ -1,0 +1,10 @@
+Package: devtemps
+Title: Template for R Developer
+Version: 0.0.0.9000
+Authors@R: 
+    person("Kittipos", "Sirivongrungson", , "ki11ip0.s.a.s@gmail.com", role = c("aut", "cre"))
+Description: Provide R Markdown template for R developer.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
