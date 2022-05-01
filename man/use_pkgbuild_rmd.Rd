@@ -19,7 +19,7 @@ A path to newly created file.
 Create R Markdown file which contains functions
 to use in R package development process. \code{\link[=use_pkgbuild_rmd]{use_pkgbuild_rmd()}} will:
 \itemize{
-\item Create \code{dev/build.Rmd} relative to package root
+\item Create \code{dev/build.Rmd} relative to the package root
 \item Add \verb{^dev$} to \code{.Rbuildignore}
 \item Open \code{build.Rmd} for editing
 }

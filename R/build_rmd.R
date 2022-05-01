@@ -7,7 +7,7 @@
 #' @description Create R Markdown file which contains functions
 #' to use in R package development process. [use_pkgbuild_rmd()] will:
 #'
-#' * Create `dev/build.Rmd` relative to package root
+#' * Create `dev/build.Rmd` relative to the package root
 #' * Add `^dev$` to `.Rbuildignore`
 #' * Open `build.Rmd` for editing
 #'
