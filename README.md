@@ -51,24 +51,27 @@ remotes::install_github("Lightbridge-KS/pkgtemp")
 
 ## Workflow
 
-1.  Create R Package by
+**Create R Package by:**
 
 ``` r
 usethis::create_package("~/path/to/yourpkg")
 ```
 
-1.  Call `pkgtemp::use_pkgbuild_rmd()`
+**Create R Markdown Template for package development by:**
 
-This will
+``` r
+pkgtemp::use_pkgbuild_rmd()
+```
+
+This will:
 
 -   Create folder `dev/`.
 
--   Write and open R Markdown file `dev/build.Rmd` which is a template
-    for developing your R package.
+-   Write and open R Markdown file `dev/build.Rmd`.
 
-1.  Go to
-    [**build.Rmd**](./inst/rmarkdown/templates/build/skeleton/skeleton.Rmd)
-    file. You will see 2 types of command in there:
+**Go to
+[build.Rmd](./inst/rmarkdown/templates/build/skeleton/skeleton.Rmd)**.
+You will see 2 types of command in there:
 
 -   **Non-commented commands:** are the command for initial setup. I
     recommend you run at the first visit. They are at the top of R
@@ -83,8 +86,8 @@ This will
 # Create a new package -------------------------------------------------
 path <- file.path(tempdir(), "yourpkg")
 usethis::create_package(path)
-#> ✔ Creating '/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/Rtmp42V6Vu/yourpkg/'
-#> ✔ Setting active project to '/private/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/Rtmp42V6Vu/yourpkg'
+#> ✔ Creating '/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/RtmpVg2CGz/yourpkg/'
+#> ✔ Setting active project to '/private/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/RtmpVg2CGz/yourpkg'
 #> ✔ Creating 'R/'
 #> ✔ Writing 'DESCRIPTION'
 #> Package: yourpkg
@@ -103,8 +106,8 @@ usethis::create_package(path)
 
 # only needed since this session isn't interactive
 usethis::proj_activate(path)
-#> ✔ Setting active project to '/private/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/Rtmp42V6Vu/yourpkg'
-#> ✔ Changing working directory to '/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/Rtmp42V6Vu/yourpkg/'
+#> ✔ Setting active project to '/private/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/RtmpVg2CGz/yourpkg'
+#> ✔ Changing working directory to '/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/RtmpVg2CGz/yourpkg/'
 .old_wd <- setwd(path)
 
 # Create Rmd Template for PKG Development

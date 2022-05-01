@@ -52,25 +52,31 @@ remotes::install_github("Lightbridge-KS/pkgtemp")
 
 ## Workflow
 
-1.  Create R Package by
+**Create R Package by:**
 
 ``` r
 usethis::create_package("~/path/to/yourpkg")
 ```
 
-1.  Call `pkgtemp::use_pkgbuild_rmd()`
+**Create R Markdown Template for package development by:**
 
-This will
+``` r
+pkgtemp::use_pkgbuild_rmd()
+```
+
+This will:
 
 -   Create folder `dev/`.
 
--   Write and open R Markdown file `dev/build.Rmd` which is a template for developing your R package.
+-   Write and open R Markdown file `dev/build.Rmd`.
 
-1.  Go to [**build.Rmd**](./inst/rmarkdown/templates/build/skeleton/skeleton.Rmd) file. You will see 2 types of command in there:
+
+**Go to [build.Rmd](./inst/rmarkdown/templates/build/skeleton/skeleton.Rmd)**. You will see 2 types of command in there:
 
 -   **Non-commented commands:** are the command for initial setup. I recommend you run at the first visit. They are at the top of R Markdown.
 
 -   **Commented commands:** you can choose to run in any order as you like.
+
 
 ## Example
 
