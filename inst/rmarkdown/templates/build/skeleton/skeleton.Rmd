@@ -80,6 +80,9 @@ Lifecycle badges
 
 ```{r vignette}
 # usethis::use_vignette("PKG")
+
+## Articles
+# usethis::use_article()
 ```
 
 ## NEWS
@@ -122,6 +125,13 @@ Use suggested packages for example datasets, to run tests, build vignettes, or m
 ```{r suggests}
 # usethis::use_package("pkg", type = "Suggests")
 ```
+
+# Functions
+
+```{r}
+# usethis::use_r()
+```
+
 
 # Testing
 
