@@ -18,7 +18,7 @@ Essential Manuals and Packages:
 -  [R Package Book](https://r-pkgs.org)
 -  [usethis](https://usethis.r-lib.org)
 
-I recommend initial setup by running code that is not comment at the first visit.
+I recommend initial setup by running the code that is not comment. Then, run the other commented code when you're ready.
 
 # Git
 
@@ -125,6 +125,8 @@ Use suggested packages for example datasets, to run tests, build vignettes, or m
 
 # Testing
 
+## testthat
+
 ```{r use_testthat}
 # usethis::use_testthat()
 ```
@@ -134,6 +136,21 @@ Helper function for testing can be place in `tests/testthat/helper-tests.R`
 ```{r}
 # fs::file_create(here("tests/testthat/helper-tests.R"))
 ```
+
+## Package Coverage (Local)
+
+See [covr](https://covr.r-lib.org)
+
+```{r}
+# covr::package_coverage()
+```
+
+for interactive use in viewer pane:
+
+```{r}
+# covr::report()
+```
+
 
 
 # Data
@@ -273,4 +290,54 @@ in the same file as where you have package-level documentation.
 ```
 
 See this [Discussion](https://github.com/STAT545-UBC/Discussion/issues/451)
+
+
+# CI workflow
+
+Github action to automate R Package workflow. 
+
+[Learn more](https://orchid00.github.io/actions_sandbox/)
+
+## R-CMD-check
+
+Github action to run R CMD Check in the cloud.
+
+This will 
+
+1. Create a YAML file: `.github/workflows/R-CMD-check.yaml`
+
+2.  Adding R-CMD-check badge to 'README.Rmd'
+
+```{r gha-check-release}
+## Quickstart CI workflow
+# usethis::use_github_action_check_release()
+```
+
+Ref: [Quickstart WF](https://github.com/r-lib/actions/tree/v1/examples#quickstart-ci-workflow)
+
+## Test Coverage
+
+1. Call `usethis::use_coverage()`
+
+```{r use_coverage}
+# usethis::use_coverage()
+```
+
+2. Use github action `test-coverage` 
+
+This will connect your package to codecov.
+
+```{r gha-test-coverage}
+# usethis::use_github_action("test-coverage")
+```
+
+Ref: [test coverage WF](https://github.com/r-lib/actions/tree/v1/examples#test-coverage-workflow)
+
+
+3. Click on codecov badge in README, it will open codecov site, then copy token to clip board, and paste the token and run:
+
+```{r}
+# covr::codecov(token = "your-token")
+```
+
 
