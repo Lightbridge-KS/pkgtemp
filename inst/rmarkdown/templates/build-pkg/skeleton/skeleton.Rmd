@@ -5,7 +5,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file()) 
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
 knitr::opts_chunk$set(eval = FALSE)
 here::i_am("dev/build.Rmd")
 library(here)
@@ -13,12 +13,12 @@ library(here)
 
 # How To
 
-Essential Manual and Package:
+Essential Manuals and Packages:
 
 -  [R Package Book](https://r-pkgs.org)
 -  [usethis](https://usethis.r-lib.org)
 
-I recommend initial setup by running code that is not commented at the first visit.
+I recommend initial setup by running code that is not comment at the first visit.
 
 # Git
 
@@ -33,7 +33,7 @@ usethis::use_git()
 Tell Git not to track theses:
 
 ```{r use_git_ignore}
-usethis::use_git_ignore("/dev/") # (Optional) ignore `dev` folder at pkg root
+usethis::use_git_ignore("/dev/") # (Optional) ignore `dev` folder at PKG root
 # usethis::use_git_ignore("file") 
 ```
 
@@ -42,7 +42,7 @@ usethis::use_git_ignore("/dev/") # (Optional) ignore `dev` folder at pkg root
 Tell R not to build theses into R package:
 
 ```{r use_build_ignore}
-usethis::use_build_ignore("dev") # (Require)
+usethis::use_build_ignore("dev") # (Require) if you use this template
 # usethis::use_build_ignore("file")
 ```
 
@@ -79,7 +79,7 @@ Lifecycle badges
 ## Vignette
 
 ```{r vignette}
-# usethis::use_vignette("pkg")
+# usethis::use_vignette("PKG")
 ```
 
 ## NEWS
@@ -103,7 +103,7 @@ A recommended approach
 ```
 
 ```{r imports_dev}
-# Developmental Package (not on CRAN)
+## Developmental Package (not on CRAN)
 # usethis::use_dev_package("pkg", remote = "OWNER/REPO")
 ```
 
@@ -123,11 +123,116 @@ Use suggested packages for example datasets, to run tests, build vignettes, or m
 # usethis::use_package("pkg", type = "Suggests")
 ```
 
+# Testing
+
+```{r use_testthat}
+# usethis::use_testthat()
+```
+
+Helper function for testing can be place in `tests/testthat/helper-tests.R`
+
+```{r}
+# fs::file_create(here("tests/testthat/helper-tests.R"))
+```
 
 
 
+# Data
+
+## Exported Data
+
+-   `usethis::use_data()`: To store exported data in `data/`. 
+Each file in this directory should be `.rda` file containing a single object.
+
+-   `usethis::use_data_raw()`: To store code that used for data preparation in `data-raw/` 
 
 
+```{r exported-data}
+# usethis::use_data(data1) 
+
+# usethis::use_data_raw("data1") # Code to prepare data
+```
+
+
+**Documenting datasets**
+
+Document the name of the dataset in `R/` as roxygen2:
+
+```{r data-doc-example}
+#' Prices of 50,000 round cut diamonds.
+#'
+#' A dataset containing the prices and other attributes of almost 54,000
+#' diamonds.
+#'
+#' @format A data frame with 53940 rows and 10 variables:
+#' \describe{
+#'   \item{price}{price, in US dollars}
+#'   \item{carat}{weight of the diamond, in carats}
+#'   ...
+#' }
+#' @source \url{http://www.diamondse.info/}
+"diamonds"
+```
+
+
+
+## Internal Data
+
+Save all of the objects for internal use in `R/sysdata.rda.`. They don’t need to be documented.
+
+```{r internal_data}
+# usethis::use_data(int_data1, int_data2, internal = TRUE)
+```
+
+## Raw Data
+
+If you want to show examples of loading/parsing raw data, put the original files in `inst/extdata`.
+
+```{r}
+# fs::dir_create("inst/extdata") 
+```
+
+```{r}
+## Write Raw Data
+# readr::write_csv(mtcars, here("inst/extdata/mtcars.csv"))
+```
+
+
+**Function: Get Path to Example Data**
+
+This function allows user to access paths to raw data. 
+
+Inspired from [readr example](https://github.com/tidyverse/readr/blob/HEAD/R/example.R).
+
+```{r}
+# usethis::use_r("example") # Create `example.R` to store `PKG_example()`
+```
+
+- Copy this `PKG_example()` to `example.R`, replace `PKG` with your package name.
+
+``` r 
+#' Get path to PKG example
+#'
+#' PKG comes bundled with a number of sample files in its `inst/extdata`
+#' directory. This function make them easy to access
+#'
+#' @param file Name of file. If `NULL`, the example files will be listed.
+#' @export
+#' @examples
+#' library(PKG)
+#' PKG_example()
+#' PKG_example("file.csv")
+PKG_example <- function(file = NULL) {
+  
+  if (is.null(file)) {
+    dir(system.file("extdata", package = "PKG"))
+    
+  } else {
+    system.file("extdata", file, package = "PKG", mustWork = TRUE)
+  }
+  
+}
+```
 
 
 # Global Var
@@ -137,8 +242,6 @@ If R CMD Check shows a message like:
     Undefined global functions or variables:
       var1 var2
       
-
-
 Put this:
 
 ```r 
@@ -153,8 +256,4 @@ in the same file as where you have package-level documentation.
 ```
 
 See this [Discussion](https://github.com/STAT545-UBC/Discussion/issues/451)
-
-
-
-
 
