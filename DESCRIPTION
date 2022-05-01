@@ -11,8 +11,11 @@ RoxygenNote: 7.1.2
 Imports: 
     fs,
     here,
+    rlang,
     rmarkdown,
     rprojroot,
     usethis
 Suggests: 
-    covr
+    covr,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
