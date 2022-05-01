@@ -24,3 +24,9 @@ to use in R package development process. \code{\link[=use_pkgbuild_rmd]{use_pkgb
 \item Open \code{build.Rmd} for editing
 }
 }
+\examples{
+\dontrun{
+# Write `dev/build.Rmd` and open for edit
+use_pkgbuild_rmd()
+}
+}

@@ -19,6 +19,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' # Write `dev/build.Rmd` and open for edit
+#' use_pkgbuild_rmd()
+#' }
 use_pkgbuild_rmd <- function(overwrite = FALSE,
                              open = rlang::is_interactive()
 ) {
