@@ -136,7 +136,6 @@ Helper function for testing can be place in `tests/testthat/helper-tests.R`
 ```
 
 
-
 # Data
 
 ## Exported Data
@@ -233,6 +232,24 @@ PKG_example <- function(file = NULL) {
   
 }
 ```
+
+
+# Template
+
+Add an R Markdown Template
+
+```{r use_rmarkdown_template}
+# usethis::use_rmarkdown_template(
+#   template_name = "Template Name",
+#   template_dir = "dir-name",
+#   template_description = "A description of the template",
+#   template_create_dir = FALSE
+# )
+```
+
+See also:
+
+-   [Create Rmd Templates](https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html)
 
 
 # Global Var
