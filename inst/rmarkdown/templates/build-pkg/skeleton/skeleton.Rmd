@@ -189,7 +189,7 @@ Save all of the objects for internal use in `R/sysdata.rda.`. They don’t need 
 If you want to show examples of loading/parsing raw data, put the original files in `inst/extdata`.
 
 ```{r}
-# fs::dir_create("inst/extdata") 
+# usethis::use_directory("inst/extdata")
 ```
 
 ```{r}
