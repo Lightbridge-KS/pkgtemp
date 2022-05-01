@@ -7,29 +7,27 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-
+[![R-CMD-check](https://github.com/Lightbridge-KS/pkgtemp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Lightbridge-KS/pkgtemp/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 > R Markdown Template for Developing R Package :package:
 
 ## Goal
 
-`{pkgtemp}` contains as series of
-[`usethis`](https://usethis.r-lib.org/index.html) and other commands in
-an **R Markdown** that provides a recipe to *kick-start* your R package
+`pkgtemp` contains as series of
+[usethis](https://usethis.r-lib.org/index.html) and other commands in an
+**R Markdown** that provides a template to *kick-start* your R package
 development process.
 
 ## Prerequisites
 
-`pkgtemp` will facilitate your R package development process. However,
-you should be somewhat familiar with how to create R Package.
-
-Checkout these resources to learn more:
+You should be somewhat familiar with how to create R Package. Checkout
+these resources to learn more:
 
 -   [**R Packages Book**](https://r-pkgs.org/index.html) by Hadley
     Wickham and Jenny Bryan.
 
--   [**`usethis`**](https://usethis.r-lib.org/index.html): a workflow
+-   [**usethis**](https://usethis.r-lib.org/index.html): a workflow
     package that `pkgtemp` relies on.
 
 (`pkgtemp` assumes that R package is develop in RStudio. If you use
@@ -47,7 +45,7 @@ remotes::install_github("Lightbridge-KS/pkgtemp")
 ## Templates
 
 -   [**Build Package
-    Template:**](./inst/rmarkdown/templates/build-pkg/skeleton/skeleton.Rmd)
+    Template:**](./inst/rmarkdown/templates/build/skeleton/skeleton.Rmd)
     contains a set of R functions to run in each step of package
     development.
 
@@ -69,7 +67,7 @@ This will
     for developing your R package.
 
 1.  Go to
-    [**`build.Rmd`**](./inst/rmarkdown/templates/build-pkg/skeleton/skeleton.Rmd)
+    [**build.Rmd**](./inst/rmarkdown/templates/build/skeleton/skeleton.Rmd)
     file. You will see 2 types of command in there:
 
 -   **Non-commented commands:** are the command for initial setup. I
@@ -85,8 +83,8 @@ This will
 # Create a new package -------------------------------------------------
 path <- file.path(tempdir(), "yourpkg")
 usethis::create_package(path)
-#> ✔ Creating '/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/Rtmpmwu7VV/yourpkg/'
-#> ✔ Setting active project to '/private/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/Rtmpmwu7VV/yourpkg'
+#> ✔ Creating '/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/Rtmp42V6Vu/yourpkg/'
+#> ✔ Setting active project to '/private/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/Rtmp42V6Vu/yourpkg'
 #> ✔ Creating 'R/'
 #> ✔ Writing 'DESCRIPTION'
 #> Package: yourpkg
@@ -105,8 +103,8 @@ usethis::create_package(path)
 
 # only needed since this session isn't interactive
 usethis::proj_activate(path)
-#> ✔ Setting active project to '/private/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/Rtmpmwu7VV/yourpkg'
-#> ✔ Changing working directory to '/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/Rtmpmwu7VV/yourpkg/'
+#> ✔ Setting active project to '/private/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/Rtmp42V6Vu/yourpkg'
+#> ✔ Changing working directory to '/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/Rtmp42V6Vu/yourpkg/'
 .old_wd <- setwd(path)
 
 # Create Rmd Template for PKG Development
