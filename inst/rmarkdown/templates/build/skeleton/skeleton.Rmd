@@ -128,8 +128,11 @@ Use suggested packages for example datasets, to run tests, build vignettes, or m
 
 # Functions
 
+Write some R functions!
+
 ```{r}
-# usethis::use_r()
+# usethis::use_r("fun1")
+# usethis::use_test("fun1")
 ```
 
 
