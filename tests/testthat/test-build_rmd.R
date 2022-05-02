@@ -27,10 +27,9 @@ test_that("use_pkgbuild_rmd() can create file", {
 
 
 
-test_that("copy_build_rmd() can copy file", {
+test_that("cp_pkgbuild_rmd() can copy file", {
 
-  test_path_rmd <- copy_build_rmd(tempfile(fileext = ".Rmd"))
-  expect_true(file.exists(test_path_rmd))
+  expect_true(cp_pkgbuild_rmd(tempfile(fileext = ".Rmd")))
 
 })
 
