@@ -4,13 +4,21 @@
 \alias{use_pkgbuild_rmd}
 \title{Create R Markdown Template for Building Package}
 \usage{
-use_pkgbuild_rmd(overwrite = FALSE, open = rlang::is_interactive())
+use_pkgbuild_rmd(
+  overwrite = FALSE,
+  open = rlang::is_interactive(),
+  download_gh = FALSE
+)
 }
 \arguments{
 \item{overwrite}{If \code{dev/build.Rmd} already exist, \code{TRUE}
 to overwrite an existing file, \code{FALSE} to throw an error.}
 
 \item{open}{Whether to open the file for interactive editing.}
+
+\item{download_gh}{If \code{FALSE} use local template.
+If \code{TRUE} use GitHub template, you need to set GitHub URL which contains file
+to download from using \code{\link[=set_github_template_url]{set_github_template_url()}}.}
 }
 \value{
 A path to newly created file.
@@ -28,5 +36,10 @@ to use in R package development process. \code{\link[=use_pkgbuild_rmd]{use_pkgb
 \dontrun{
 # Write `dev/build.Rmd` and open for edit
 use_pkgbuild_rmd()
+}
+}
+\seealso{
+\itemize{
+\item \code{\link[=set_github_template_url]{set_github_template_url()}}: for setting GitHub URL to download your own template file
 }
 }
