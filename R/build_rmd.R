@@ -14,8 +14,8 @@
 #' @param overwrite If `dev/build.Rmd` already exist, `TRUE`
 #' to overwrite an existing file, `FALSE` to throw an error.
 #' @param open Whether to open the file for interactive editing.
-#' @param download_gh If `FALSE` use local template.
-#' If `TRUE` use GitHub template, you need to set GitHub URL which contains file
+#' @param remote If `FALSE` (default) use a local template.
+#' If `TRUE` download a template from a file in GitHub, you need to set GitHub URL which contains file
 #' to download from using [set_github_template_url()].
 #'
 #' @return A path to newly created file.
@@ -33,7 +33,7 @@
 #' }
 use_pkgbuild_rmd <- function(overwrite = FALSE,
                              open = rlang::is_interactive(),
-                             download_gh = FALSE
+                             remote = FALSE
 ) {
 
   d <- "dev/"; f <- "build.Rmd"
@@ -51,11 +51,11 @@ use_pkgbuild_rmd <- function(overwrite = FALSE,
 
   if (has_dir) {
     ## (Has dir + has file + overwrite) or (Has dir + no file)
-    get_pkgbuild_rmd(download_gh = download_gh)
+    get_pkgbuild_rmd(remote = remote)
   } else {
     ## Not has dir
     dir_create_dev(d)
-    get_pkgbuild_rmd(download_gh = download_gh)
+    get_pkgbuild_rmd(remote = remote)
   }
   # Ignore
   ## Add `^dev$` to build ignore
@@ -73,13 +73,13 @@ use_pkgbuild_rmd <- function(overwrite = FALSE,
 
 #' Get pkgbuild template by download or copy from Local
 #'
-#' @param download_gh
+#' @param remote
 #'
 #' @return logical if operation success
 #' @noRd
-get_pkgbuild_rmd <- function(download_gh = FALSE) {
+get_pkgbuild_rmd <- function(remote = FALSE) {
 
-  if (download_gh) {
+  if (remote) {
 
     dl_pkgbuild_rmd()
 

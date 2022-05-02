@@ -7,7 +7,7 @@
 use_pkgbuild_rmd(
   overwrite = FALSE,
   open = rlang::is_interactive(),
-  download_gh = FALSE
+  remote = FALSE
 )
 }
 \arguments{
@@ -16,8 +16,8 @@ to overwrite an existing file, \code{FALSE} to throw an error.}
 
 \item{open}{Whether to open the file for interactive editing.}
 
-\item{download_gh}{If \code{FALSE} use local template.
-If \code{TRUE} use GitHub template, you need to set GitHub URL which contains file
+\item{remote}{If \code{FALSE} (default) use a local template.
+If \code{TRUE} download a template from a file in GitHub, you need to set GitHub URL which contains file
 to download from using \code{\link[=set_github_template_url]{set_github_template_url()}}.}
 }
 \value{
