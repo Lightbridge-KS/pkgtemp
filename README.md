@@ -8,6 +8,7 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/Lightbridge-KS/pkgtemp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Lightbridge-KS/pkgtemp/actions/workflows/R-CMD-check.yaml)
+
 <!-- badges: end -->
 
 > R Markdown Template for Developing R Package :package:
@@ -17,7 +18,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 `pkgtemp` contains as series of
 [usethis](https://usethis.r-lib.org/index.html) and other commands in an
 **R Markdown** that provides a template to *kick-start* your R package
-development process.
+development process. If you want to use **your own template** from
+GitHub, this package will facilitate that too.
 
 ## Prerequisites
 
@@ -67,7 +69,7 @@ This will:
 
 -   Create folder `dev/`.
 
--   Write and open R Markdown file `dev/build.Rmd`.
+-   Write and open R Markdown file `dev/build.Rmd` (generate locally)
 
 **Go to
 [build.Rmd](./inst/rmarkdown/templates/build/skeleton/skeleton.Rmd)**.
@@ -80,14 +82,14 @@ You will see 2 types of command in there:
 -   **Commented commands:** you can choose to run in any order as you
     like.
 
-## Example
+### Example
 
 ``` r
 # Create a new package -------------------------------------------------
 path <- file.path(tempdir(), "yourpkg")
 usethis::create_package(path)
-#> ✔ Creating '/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/RtmpVg2CGz/yourpkg/'
-#> ✔ Setting active project to '/private/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/RtmpVg2CGz/yourpkg'
+#> ✔ Creating '/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/RtmpU7eQdS/yourpkg/'
+#> ✔ Setting active project to '/private/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/RtmpU7eQdS/yourpkg'
 #> ✔ Creating 'R/'
 #> ✔ Writing 'DESCRIPTION'
 #> Package: yourpkg
@@ -106,9 +108,9 @@ usethis::create_package(path)
 
 # only needed since this session isn't interactive
 usethis::proj_activate(path)
-#> ✔ Setting active project to '/private/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/RtmpVg2CGz/yourpkg'
-#> ✔ Changing working directory to '/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/RtmpVg2CGz/yourpkg/'
-.old_wd <- setwd(path)
+#> ✔ Setting active project to '/private/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/RtmpU7eQdS/yourpkg'
+#> ✔ Changing working directory to '/var/folders/ry/z9m8k9cs4594pv3458npy1zw0000gn/T/RtmpU7eQdS/yourpkg/'
+.old_wd <- setwd(path) # Only in this example
 
 # Create Rmd Template for PKG Development
 pkgtemp::use_pkgbuild_rmd(open = FALSE)
@@ -116,10 +118,56 @@ pkgtemp::use_pkgbuild_rmd(open = FALSE)
 #> ✔ Writing 'dev/build.Rmd'
 #> ✔ Adding '^dev$' to '.Rbuildignore'
 #> • Edit 'dev/build.Rmd'
+```
 
-setwd(.old_wd)
+## Custom Template
+
+Everyone can have a different package development workflow. This second
+approach will allows you to use your default template from a file in
+GitHub.
+
+Here how it works:
+
+-   Create your own R Markdown template for building package in Github.
+    (for example, mine is
+    [here](https://github.com/Lightbridge-KS/workflows-rmd/blob/main/pkgbuild.Rmd))
+
+-   Provide a default GitHub URL where `pkgtemp` will find as your
+    remote template. You’ll need to config global option in
+    `~/.Rprofile` as follows.
+
+``` r
+# To edit `~/.Rprofile`
+usethis::edit_r_profile()
+```
+
+Copy code below to `~/.Rprofile` and provide your `pkgbuild_url` as URL
+to your default template.
+
+``` r
+if (interactive() && requireNamespace("pkgtemp", quietly = TRUE)) {
+
+  pkgtemp::set_github_template_url(
+    pkgbuild_url = "https://github.com/OWNER/REPO/blob/REF/path/to/default-template.Rmd"
+  )
+}
+```
+
+-   To use your **default template** from GitHub, create R package as
+    usual and call the previous function `use_pkgbuild_rmd()` with
+    `remote = TRUE`.
+
+``` r
+pkgtemp::use_pkgbuild_rmd(remote = TRUE)
+```
+
+Alternatively, If you want to use any other GitHub template **just once
+in a while**, provides a `url` directly.
+
+``` r
+pkgtemp::use_pkgbuild_rmd(url = "https://github.com/OWNER/REPO/blob/REF/path/to/one-off-template.Rmd")
 ```
 
 ------------------------------------------------------------------------
 
-Last updated: 2022-05-01
+Last updated: 2022-05-03
