@@ -42,11 +42,11 @@ use_pkgbuild_rmd <- function(overwrite = FALSE,
 
   if (has_dir) {
     ## (Has dir + has file + overwrite) or (Has dir + no file)
-    dest_path <- copy_build_rmd(dest)
+    dest_path <- cp_pkgbuild_rmd(dest)
   } else {
     ## Not has dir
     dir_create_dev(d)
-    dest_path <- copy_build_rmd(dest)
+    dest_path <- cp_pkgbuild_rmd(dest)
   }
   # Ignore
   ## Add `^dev$` to build ignore
@@ -91,7 +91,7 @@ dir_create_dev <- function(dir = "dev/") {
 #'
 #' @return path of destination and write usethis UI to console
 #' @noRd
-copy_build_rmd <- function(dest = "dev/build.Rmd") {
+cp_pkgbuild_rmd <- function(dest = "dev/build.Rmd") {
 
   is_success <- file.copy(
     from = pkgtemp_paths()[["path_build_rmd"]],
