@@ -11,14 +11,13 @@
 #' * Add `^dev$` to `.Rbuildignore`
 #' * Open `build.Rmd` for editing
 #'
-#' @param overwrite (Logical) If `dev/build.Rmd` already exist, `TRUE`
+#' @param overwrite If `dev/build.Rmd` already exist, `TRUE`
 #' to overwrite an existing file, `FALSE` to throw an error.
-#' @param open (Logical) Whether to open the file for interactive editing.
-#' @param remote (Logical or Character) Remote template options, choose one of:
-#' * \strong{`FALSE`} (default) to use a local template stored in `pkgtemp`.
-#' * \strong{`TRUE`} to download a default template file from in GitHub that you have setup already by [set_github_template_url()].
-#' * \strong{URL} which points to a template file in GitHub that you have read access.
-#'
+#' @param open Whether to open the file for interactive editing.
+#' @param remote Remote template options, choose one of:
+#' * \strong{`FALSE`}: (default) To use a local template stored in `pkgtemp`.
+#' * \strong{`TRUE`}: To download a default template file from in GitHub that you have already setup by [set_github_template_url()].
+#' @param url If not `NULL`, provide a GitHub URL to download a template file from.
 #' @return A path to newly created file.
 #'
 #' @seealso
@@ -34,7 +33,8 @@
 #' }
 use_pkgbuild_rmd <- function(overwrite = FALSE,
                              open = rlang::is_interactive(),
-                             remote = FALSE
+                             remote = FALSE,
+                             url = NULL
 ) {
 
   d <- "dev/"; f <- "build.Rmd"
@@ -52,11 +52,11 @@ use_pkgbuild_rmd <- function(overwrite = FALSE,
 
   if (has_dir) {
     ## (Has dir + has file + overwrite) or (Has dir + no file)
-    get_pkgbuild_rmd(remote = remote)
+    get_pkgbuild_rmd(remote = remote, url = url)
   } else {
     ## Not has dir
     dir_create_dev(d)
-    get_pkgbuild_rmd(remote = remote)
+    get_pkgbuild_rmd(remote = remote, url = url)
   }
   # Ignore
   ## Add `^dev$` to build ignore
@@ -78,19 +78,13 @@ use_pkgbuild_rmd <- function(overwrite = FALSE,
 #'
 #' @return logical if operation success
 #' @noRd
-get_pkgbuild_rmd <- function(remote = FALSE, dest = "dev/build.Rmd") {
+get_pkgbuild_rmd <- function(remote = FALSE, url = NULL, dest = "dev/build.Rmd") {
 
-  if(is.character(remote)){
-    is_success <- usethis::use_github_file(
-      repo_spec = remote,
-      save_as = dest
-    )
-    return(is_success)
-  }
+  if (!is.null(url)) dl_pkgbuild_rmd_any(url = url, dest = dest)
 
   if (remote) {
 
-    dl_pkgbuild_rmd(dest = dest)
+    dl_pkgbuild_rmd_default(dest = dest)
 
   } else {
 
@@ -100,7 +94,24 @@ get_pkgbuild_rmd <- function(remote = FALSE, dest = "dev/build.Rmd") {
 
 }
 
-# Download Build ----------------------------------------------------------
+
+# Download Build (Any) ----------------------------------------------------
+
+dl_pkgbuild_rmd_any <- function(url = NULL, dest = "dev/build.Rmd") {
+
+  if (is.null(url)) return(FALSE)
+
+  if (!is.character(url)) usethis::ui_stop("Please provide a valid URL to a file in GitHub.")
+
+  is_success <- usethis::use_github_file(
+    repo_spec = url,
+    save_as = dest
+  )
+  is_success
+
+}
+
+# Download Build (Default) ----------------------------------------------------------
 
 #' Download Default File from Github URL
 #'
@@ -108,7 +119,7 @@ get_pkgbuild_rmd <- function(remote = FALSE, dest = "dev/build.Rmd") {
 #'
 #' @return logical whether success
 #' @noRd
-dl_pkgbuild_rmd <- function(dest = "dev/build.Rmd") {
+dl_pkgbuild_rmd_default <- function(dest = "dev/build.Rmd") {
 
   url <- get_github_template_url("pkgbuild_url")
 

@@ -7,21 +7,23 @@
 use_pkgbuild_rmd(
   overwrite = FALSE,
   open = rlang::is_interactive(),
-  remote = FALSE
+  remote = FALSE,
+  url = NULL
 )
 }
 \arguments{
-\item{overwrite}{(Logical) If \code{dev/build.Rmd} already exist, \code{TRUE}
+\item{overwrite}{If \code{dev/build.Rmd} already exist, \code{TRUE}
 to overwrite an existing file, \code{FALSE} to throw an error.}
 
-\item{open}{(Logical) Whether to open the file for interactive editing.}
+\item{open}{Whether to open the file for interactive editing.}
 
-\item{remote}{(Logical or Character) Remote template options, choose one of:
+\item{remote}{Remote template options, choose one of:
 \itemize{
-\item \strong{\code{FALSE}} (default) to use a local template stored in \code{pkgtemp}.
-\item \strong{\code{TRUE}} to download a default template file from in GitHub that you have setup already by \code{\link[=set_github_template_url]{set_github_template_url()}}.
-\item \strong{URL} which points to a template file in GitHub that you have read access.
+\item \strong{\code{FALSE}}: (default) To use a local template stored in \code{pkgtemp}.
+\item \strong{\code{TRUE}}: To download a default template file from in GitHub that you have already setup by \code{\link[=set_github_template_url]{set_github_template_url()}}.
 }}
+
+\item{url}{If not \code{NULL}, provide a GitHub URL to download a template file from.}
 }
 \value{
 A path to newly created file.
